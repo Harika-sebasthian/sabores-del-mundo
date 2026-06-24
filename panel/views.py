@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from web_sabores.models import Consulta, UsuarioPermitido
+from web_sabores.models import Consulta
+from panel.models import  UsuarioPermitido
 import uuid
 
 def registro(request):

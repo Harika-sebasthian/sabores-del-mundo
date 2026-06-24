@@ -10,7 +10,7 @@ class Consulta(models.Model):
     fecha     = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        texto = self.mensaje.lower()
+        texto = (self.mensaje + ' ' + self.asunto).lower()
         if any(p in texto for p in ['precio','costo','cuesta','tarifa','compra']):
             self.categoria = 'Consulta Comercial'
         elif any(p in texto for p in ['soporte','error','problema','ayuda']):
@@ -28,16 +28,3 @@ class Consulta(models.Model):
         verbose_name = 'Consulta'
         verbose_name_plural = 'Consultas'
         ordering = ['-fecha']
-
-
-class UsuarioPermitido(models.Model):
-    nombre            = models.CharField(max_length=200)
-    email             = models.EmailField(unique=True)
-    codigo_validacion = models.CharField(max_length=50)
-
-    def __str__(self):
-        return f'{self.nombre} — {self.email}'
-
-    class Meta:
-        verbose_name = 'Usuario Permitido'
-        verbose_name_plural = 'Usuarios Permitidos'
