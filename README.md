@@ -1,4 +1,5 @@
-# Sabores del Mundo — Programación Web II Segundo Parcial
+# Sabores del Mundo — Programación Web II 
+## Segundo Parcial
 
 Sitio web para restaurante de cocina fusión desarrollado con Python y Django.
 
