@@ -27,6 +27,10 @@ Sitio web para restaurante de cocina fusión desarrollado con Python y Django.
 - Login: `/panel/login/`
 - Dashboard: `/panel/dashboard/`
 
+## Credenciales Django
+- Usuario: admin
+- Contraseña: Admin2026
+
 ## Configuración local
 1. Clonar el repositorio
 2. Crear entorno virtual: `python -m venv .venv`
@@ -37,4 +41,4 @@ Sitio web para restaurante de cocina fusión desarrollado con Python y Django.
 
 ## Despliegue
 - GitHub: https://github.com/Harika-sebasthian/sabores-del-mundo
-- Render: [URL del sitio desplegado]
+- Render: https://sabores-del-mundo.onrender.com
