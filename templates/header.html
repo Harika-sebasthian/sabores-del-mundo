@@ -40,6 +40,35 @@
                         <span class="nav__link-bar"></span>
                     </a>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav__item">
+                    <a href="{% url 'dashboard' %}" class="nav__link">
+                        <span class="nav__link-text">Panel</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'logout_panel' %}" class="nav__link">
+                        <span class="nav__link-text">Cerrar sesión</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav__item">
+                    <a href="{% url 'login_panel' %}"
+                       class="nav__link {% if request.resolver_match.url_name == 'login_panel' %}nav__link--active{% endif %}">
+                        <span class="nav__link-text">Iniciar sesión</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'registro' %}"
+                       class="nav__link {% if request.resolver_match.url_name == 'registro' %}nav__link--active{% endif %}">
+                        <span class="nav__link-text">Registrarse</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
 
