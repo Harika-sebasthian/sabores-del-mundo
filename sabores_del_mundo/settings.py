@@ -1,23 +1,13 @@
-
 from pathlib import Path
+import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-4by4y2scq8f=^+t7brsv3!q@$5mp)xo@nu7zd4_ce)$mb8@nes')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4by4y2scq8f=^+t7brsv3!q@$5mp)xo@nu7zd4_ce)$mb8@nes'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -61,10 +51,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sabores_del_mundo.wsgi.application'
 
-
-# Database
-import os
-
+# Base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -77,51 +64,29 @@ if DATABASE_URL:
     import dj_database_url
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
-
-# Password validation
-
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
+# Archivos estáticos
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-# Email
-EMAIL_BACKEND   = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST      = 'c2280296.ferozo.com'
-EMAIL_PORT      = 465
-EMAIL_USE_SSL   = True
-EMAIL_USE_TLS   = False
-EMAIL_HOST_USER = 'svarela@proyectoweb.website'
-EMAIL_HOST_PASSWORD = 'Sebastian2026/'
-ALLOWED_HOSTS = ['*']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Email
+EMAIL_BACKEND     = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST        = os.environ.get('EMAIL_HOST', 'c2280296.ferozo.com')
+EMAIL_PORT        = int(os.environ.get('EMAIL_PORT', 465))
+EMAIL_USE_SSL     = True
+EMAIL_USE_TLS     = False
+EMAIL_HOST_USER   = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
