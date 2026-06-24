@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nuestros Sabores{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'web_sabores/css/sabores.css' %}">
+    <style>
+        .page-hero--sabores {
+            background-image: linear-gradient(160deg, rgba(10,10,10,.85) 0%, rgba(26,15,0,.75) 100%), url('{% static "web_sabores/img/hero-sabores.jpg" %}');
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<section class="page-hero page-hero--sabores" >
+    <div class="page-hero__overlay"></div>
+    <div class="container">
+        <div class="page-hero__content">
+            <span class="section__eyebrow">Cocina Fusión Internacional</span>
+            <h1 class="page-hero__title">Nuestros Sabores</h1>
+            <p class="page-hero__desc">
+                {{ total }} creaciones únicas que viajan por los cinco continentes.
+                Cada plato, una historia. Cada bocado, una cultura.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="galeria">
+    <div class="container">
+
+        <div class="galeria__header">
+            <h2 class="section__title">Explorá el Menú</h2>
+            <p class="galeria__count">{{ total }} platos disponibles</p>
+        </div>
+
+        <div class="galeria__grid">
+            {% for plato in platos %}
+            <article class="plato-card">
+                <div class="plato-card__img-wrap">
+                    <img
+                        src="{% static plato.imagen %}"
+                        alt="{{ plato.nombre }}"
+                        class="plato-card__img"
+                        loading="lazy"
+                    >
+                    <div class="plato-card__overlay">
+                        <span class="plato-card__origen">{{ plato.origen }}</span>
+                        <h3 class="plato-card__nombre">{{ plato.nombre }}</h3>
+                        <p class="plato-card__desc">{{ plato.descripcion }}</p>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+    <div class="container">
+        <h2 class="cta-banner__title">¿Querés probarlos todos?</h2>
+        <p class="cta-banner__desc">
+            Reservá tu lugar y viví la experiencia completa de Sabores del Mundo.
+        </p>
+        <a href="{% url 'contacto' %}" class="btn btn--light btn--lg">
+            Reservar ahora
+        </a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'panel/base_panel.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="dashboard__title">Panel de Administración</h2>
+
+<!-- RESUMEN ESTADÍSTICO -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-card__number">{{ total }}</span>
+        <span class="stat-card__label">Total consultas</span>
+    </div>
+    {% for categoria, cantidad in stats.items %}
+    <div class="stat-card">
+        <span class="stat-card__number stat-card__number--primary">{{ cantidad }}</span>
+        <span class="stat-card__label">{{ categoria }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- TABLA -->
+<div class="tabla-wrap">
+    <table class="tabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Asunto</th>
+                <th>Categoría</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consulta in consultas %}
+            <tr>
+                <td>{{ consulta.nombre }}</td>
+                <td class="tabla td--muted">{{ consulta.email }}</td>
+                <td>{{ consulta.asunto }}</td>
+                <td><span class="badge">{{ consulta.categoria }}</span></td>
+                <td class="tabla td--muted">{{ consulta.fecha|date:"d/m/Y H:i" }}</td>
+                <td>
+                    <a href="{% url 'eliminar_consulta' consulta.id %}"
+                       onclick="return confirm('¿Eliminar esta consulta?')"
+                       class="btn-eliminar">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="tabla__empty">No hay consultas aún.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

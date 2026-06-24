@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'web_sabores/css/inicio.css' %}">
+    <style>
+        .hero {
+            background-image: url('{% static "web_sabores/img/hero-bg.jpg" %}');
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+        <p class="hero__eyebrow">Cocina Fusión Internacional</p>
+        <h1 class="hero__title">
+            Una mesa<br>
+            <em>sin fronteras</em>
+        </h1>
+        <p class="hero__subtitle">
+            Viajamos por los cinco continentes para traerte sabores
+            únicos, técnicas ancestrales y emplatados de autor.
+            Cada plato cuenta una historia.
+        </p>
+        <div class="hero__actions">
+            <a href="{% url 'sabores' %}" class="btn btn--primary">
+                Ver Nuestros Sabores
+            </a>
+            <a href="{% url 'contacto' %}" class="btn btn--outline">
+                Reservar Mesa
+            </a>
+        </div>
+    </div>
+    <div class="hero__scroll-hint">
+        <span>Explorá</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- CONCEPTO -->
+<section class="concepto">
+    <div class="container">
+        <div class="concepto__grid">
+            <div class="concepto__text">
+                <span class="section__eyebrow">Nuestra Filosofía</span>
+                <h2 class="section__title">El mundo en un plato</h2>
+                <p>
+                    En <strong>Sabores del Mundo</strong> creemos que la cocina
+                    es el lenguaje universal que conecta culturas. Nuestro equipo
+                    de chefs viaja, investiga y reinterpreta recetas tradicionales
+                    de los cinco continentes respetando sus ingredientes esenciales.
+                </p>
+                <p>
+                    Cada visita es una experiencia sensorial distinta: colores,
+                    aromas, texturas y sabores que te transportan sin salir
+                    de Buenos Aires.
+                </p>
+                <a href="{% url 'sabores' %}" class="btn btn--primary">
+                    Descubrí el menú &rarr;
+                </a>
+            </div>
+            <div class="concepto__stats">
+                <div class="stat-card">
+                    <span class="stat-card__number">{{ total_platos }}+</span>
+                    <span class="stat-card__label">Platos del mundo</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__number">5</span>
+                    <span class="stat-card__label">Continentes</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__number">12</span>
+                    <span class="stat-card__label">Años de experiencia</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__number">4.9 ⭐</span>
+                    <span class="stat-card__label">Calificación promedio</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PLATOS DESTACADOS -->
+<section class="destacados">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">Selección del chef</span>
+            <h2 class="section__title">Platos Destacados</h2>
+            <p class="section__desc">
+                Una selección especial de nuestra cocina para esta semana.
+            </p>
+        </div>
+
+        <div class="destacados__grid">
+            {% for plato in platos_destacados %}
+            <article class="plato-card">
+                <div class="plato-card__img-wrap">
+                    <img
+                        src="{% static plato.imagen %}"
+                        alt="{{ plato.nombre }}"
+                        class="plato-card__img"
+                    >
+                    <div class="plato-card__overlay">
+                        <span class="plato-card__origen">{{ plato.origen }}</span>
+                        <h3 class="plato-card__nombre">{{ plato.nombre }}</h3>
+                        <p class="plato-card__desc">{{ plato.descripcion }}</p>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="section__cta">
+            <a href="{% url 'sabores' %}" class="btn btn--primary">
+                Ver todos los sabores
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+    <div class="container">
+        <h2 class="cta-banner__title">¿Listo para el viaje?</h2>
+        <p class="cta-banner__desc">
+            Reservá tu mesa y dejate llevar por los sabores del mundo.
+        </p>
+        <a href="{% url 'contacto' %}" class="btn btn--light btn--lg">
+            Contactanos ahora
+        </a>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/inicio.js' %}"></script>
+{% endblock %}

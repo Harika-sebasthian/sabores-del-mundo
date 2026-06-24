@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gastronomía Mundial{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'web_sabores/css/gastronomia.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-hero page-hero--gastronomia">
+    <div class="page-hero__overlay"></div>
+    <div class="container">
+        <div class="page-hero__content">
+            <span class="section__eyebrow">API — TheMealDB</span>
+            <h1 class="page-hero__title">Gastronomía Mundial</h1>
+            <p class="page-hero__desc">
+                Explorá recetas de distintas culturas del mundo, traídas en tiempo real.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="gastronomia-section">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__eyebrow">Recetas del mundo</span>
+            <h2 class="section__title">Inspiración culinaria</h2>
+            <p class="section__desc">Recetas obtenidas en tiempo real desde TheMealDB.</p>
+        </div>
+
+        <div class="gastronomia__grid">
+            {% for plato in platos_api %}
+            <article class="meal-card">
+                <div class="meal-card__img-wrap">
+                    <img src="{{ plato.strMealThumb }}" alt="{{ plato.strMeal }}" class="meal-card__img" loading="lazy">
+                </div>
+               <div class="meal-card__info">
+                   <span class="meal-card__categoria">{{ plato.strCategory }}</span>
+                   <h3 class="meal-card__nombre">{{ plato.strMeal }}</h3>
+                   <span class="meal-card__origen">{{ plato.strArea }}</span>
+                   <a href="https://www.themealdb.com/meal/{{ plato.idMeal }}" target="_blank" class="meal-card__link">Ver receta completa →</a>
+               </div>
+            </article>
+            {% empty %}
+            <p style="color: var(--color-text-muted); text-align:center;">No se pudieron cargar las recetas en este momento.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

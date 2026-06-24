@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'web_sabores/css/contacto.css' %}">
+    <style>
+        .page-hero--contacto {
+            background-image: linear-gradient(160deg, rgba(10,10,10,.85) 0%, rgba(13,26,11,.75) 100%), url('{% static "web_sabores/img/hero-contacto.jpg" %}');
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<section class="page-hero page-hero--contacto">
+    <div class="page-hero__overlay"></div>
+    <div class="container">
+        <div class="page-hero__content">
+            <span class="section__eyebrow">Estamos para vos</span>
+            <h1 class="page-hero__title">Contacto</h1>
+            <p class="page-hero__desc">
+                Reservas, consultas, eventos privados o simplemente decinos hola.
+                Respondemos en menos de 24 horas.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN PRINCIPAL -->
+<section class="contacto-section">
+    <div class="container">
+        <div class="contacto-section__grid">
+
+            <!-- INFO -->
+            <div class="contacto-info">
+                <h2 class="contacto-info__title">Encontranos</h2>
+                <ul class="contacto-info__list">
+                    <li class="contacto-info__item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <strong>Dirección</strong>
+                            <p>Av. Juan B Justo 1250, Palermo, CABA</p>
+                        </div>
+                    </li>
+                    <li class="contacto-info__item">
+                        <span class="info-icon">📞</span>
+                        <div>
+                            <strong>Teléfono</strong>
+                            <p>+54 11 4000-1234</p>
+                        </div>
+                    </li>
+                    <li class="contacto-info__item">
+                        <span class="info-icon">✉️</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>hola@saboresdelmundo.com.ar</p>
+                        </div>
+                    </li>
+                    <li class="contacto-info__item">
+                        <span class="info-icon">🕐</span>
+                        <div>
+                            <strong>Horario</strong>
+                            <p>Lun–Vie: 12:00 – 23:00 hs</p>
+                            <p>Sáb–Dom: 12:00 – 00:00 hs</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="contacto-info__social">
+                    <h3>Seguinos</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.8">
+                                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                                <circle cx="12" cy="12" r="5"/>
+                                <circle cx="17.5" cy="6.5" r="1.2"
+                                        fill="currentColor" stroke="none"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.8">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                            Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORMULARIO -->
+            <div class="contacto-form-wrap">
+                <h2 class="contacto-form-wrap__title">Hacé tu reserva</h2>
+
+                <form
+                    class="contacto-form"
+                    id="contacto-form"
+                    method="POST"
+                    action="{% url 'contacto' %}"
+                >
+                    {% csrf_token %}
+
+                    <!-- Nombre -->
+                    <div class="form-group" id="group-nombre">
+                        <label class="form-label" for="nombre">
+                            Nombre completo <span class="form-required">*</span>
+                        </label>
+                        <div class="form-input-wrap">
+                            {{ form.nombre }}
+                            <span class="form-input-icon--ok">✓</span>
+                        </div>
+                        <span class="form-error-msg" id="error-nombre">
+                            {% if form.nombre.errors %}{{ form.nombre.errors.0 }}{% endif %}
+                        </span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group" id="group-email">
+                        <label class="form-label" for="email">
+                            Correo electrónico <span class="form-required">*</span>
+                        </label>
+                        <div class="form-input-wrap">
+                            {{ form.email }}
+                            <span class="form-input-icon--ok">✓</span>
+                        </div>
+                        <span class="form-error-msg" id="error-email">
+                            {% if form.email.errors %}{{ form.email.errors.0 }}{% endif %}
+                        </span>
+                    </div>
+
+                    <!-- Asunto -->
+                    <div class="form-group" id="group-asunto">
+                        <label class="form-label" for="asunto">
+                            Asunto <span class="form-required">*</span>
+                        </label>
+                        <div class="form-input-wrap">
+                            {{ form.asunto }}
+                        </div>
+                        <span class="form-error-msg" id="error-asunto">
+                            {% if form.asunto.errors %}{{ form.asunto.errors.0 }}{% endif %}
+                        </span>
+                    </div>
+
+                    <!-- Mensaje -->
+                    <div class="form-group" id="group-mensaje">
+                        <label class="form-label" for="mensaje">
+                            Mensaje <span class="form-required">*</span>
+                        </label>
+                        <div class="form-input-wrap">
+                            {{ form.mensaje }}
+                            <span class="form-char-count" id="char-count">0 / 500</span>
+                        </div>
+                        <span class="form-error-msg" id="error-mensaje">
+                            {% if form.mensaje.errors %}{{ form.mensaje.errors.0 }}{% endif %}
+                        </span>
+                    </div>
+
+                    <button type="submit" class="btn btn--accent btn--full">
+                        Hacer una reserva →
+                    </button>
+
+                    <p class="form-note">
+                        <span class="form-required">*</span> Campos obligatorios.
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'web_sabores/js/contacto.js' %}"></script>
+{% endblock %}

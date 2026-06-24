@@ -1,0 +1,53 @@
+{% load static %}
+<header class="site-header" id="site-header">
+    <div class="header__inner">
+
+        <a href="{% url 'inicio' %}" class="header__logo">
+            <img src="{% static 'img/logo.png' %}" alt="Sabores del Mundo" class="logo__img">
+            <div class="logo__text">
+                <span class="logo__name">Sabores del Mundo</span>
+                <span class="logo__tagline">Cocina Fusión Internacional</span>
+            </div>
+        </a>
+
+        <nav class="header__nav" id="main-nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="{% url 'inicio' %}"
+                       class="nav__link {% if request.resolver_match.url_name == 'inicio' %}nav__link--active{% endif %}">
+                        <span class="nav__link-text">Inicio</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'sabores' %}"
+                       class="nav__link {% if request.resolver_match.url_name == 'sabores' %}nav__link--active{% endif %}">
+                        <span class="nav__link-text">Sabores</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'contacto' %}"
+                       class="nav__link {% if request.resolver_match.url_name == 'contacto' %}nav__link--active{% endif %}">
+                         <span class="nav__link-text">Contacto</span>
+                         <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="{% url 'gastronomia' %}"
+                       class="nav__link {% if request.resolver_match.url_name == 'gastronomia' %}nav__link--active{% endif %}">
+                        <span class="nav__link-text">Gastronomía</span>
+                        <span class="nav__link-bar"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <button class="header__toggle" id="nav-toggle" aria-label="Abrir menú">
+            <span class="toggle__bar"></span>
+            <span class="toggle__bar"></span>
+            <span class="toggle__bar"></span>
+        </button>
+
+    </div>
+</header>

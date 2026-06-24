@@ -1,0 +1,21 @@
+{% extends 'panel/base_panel.html' %}
+{% block title %}Validar Cuenta{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2 class="auth-card__title">Validar Cuenta</h2>
+    <p class="auth-card__subtitle">Ingresá tu email y el código que recibiste.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" name="email" class="form-input" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Código de validación</label>
+            <input type="text" name="codigo" class="form-input" placeholder="Ej: ABC123" required>
+        </div>
+        <button type="submit" class="btn btn--accent">Validar cuenta</button>
+    </form>
+</div>
+{% endblock %}
